@@ -1,3 +1,6 @@
+import CasePaths
+
+@CasePathable
 public enum Value: Equatable, Sendable, Hashable {
     case array([Self])
     case boolean(Bool)
@@ -7,17 +10,17 @@ public enum Value: Equatable, Sendable, Hashable {
     case string(String)
 }
 
-extension Value: Identifiable {
-    public var id: Value {
-        if let string: String = try? lookUp(in: self, locator: .key("id", .string)) {
-            return .string(string)
-        }
-        if let number: Double = try? lookUp(in: self, locator: .key("id", .number)) {
-            return .number(number)
-        }
-        return .null
-    }
-}
+//extension Value: Identifiable {
+//    public var id: Value {
+//        if let string: String = try? lookUp(in: self, locator: .key("id", .string)) {
+//            return .string(string)
+//        }
+//        if let number: Double = try? lookUp(in: self, locator: .key("id", .number)) {
+//            return .number(number)
+//        }
+//        return .null
+//    }
+//}
 
 extension Value: Codable {
     public init(from decoder: Decoder) throws {
