@@ -9,17 +9,17 @@ public enum Value: Equatable, Sendable, Hashable {
 
 extension Value: Identifiable {
     public var id: Value {
-        if let string: String = try? locate(.key("id", .string), in: self) {
+        if let string: String = try? lookUp(in: self, locator: .key("id", .string)) {
             return .string(string)
         }
-        if let number: Double = try? locate(.key("id", .number), in: self) {
+        if let number: Double = try? lookUp(in: self, locator: .key("id", .number)) {
             return .number(number)
         }
         return .null
     }
 }
 
-extension Value: Decodable {
+extension Value: Codable {
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         
@@ -64,8 +64,27 @@ extension Value: Decodable {
             Value.self,
             DecodingError.Context(
                 codingPath: decoder.codingPath,
-                debugDescription: "Unable to decode Value from JSON."
+                debugDescription: "Unable to decode Value from JSON"
             )
         )
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        
+        switch self {
+        case .null:
+            try container.encodeNil()
+        case .boolean(let boolValue):
+            try container.encode(boolValue)
+        case .number(let numberValue):
+            try container.encode(numberValue)
+        case .string(let stringValue):
+            try container.encode(stringValue)
+        case .array(let arrayValue):
+            try container.encode(arrayValue)
+        case .object(let objectValue):
+            try container.encode(objectValue)
+        }
     }
 }

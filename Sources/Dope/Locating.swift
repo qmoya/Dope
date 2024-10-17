@@ -14,18 +14,18 @@ public indirect enum Locator: Equatable, Sendable {
 
 extension Value {
     public subscript<T>(_ locator: Locator) -> T? {
-        try? locate(locator, in: self)
+        try? lookUp(in: self, locator: locator)
     }
 
     public subscript<T>(_ locator: Locator, default defaultValue: T) -> T {
-        guard let value: T = try? locate(locator, in: self) else {
+        guard let value: T = try? lookUp(in: self, locator: locator) else {
             return defaultValue
         }
         return value
     }
 }
 
-func locate<T>(_ locator: Locator, in value: Value) throws(LocatingError) -> T {
+func lookUp<T>(in value: Value, locator: Locator) throws(LocatingError) -> T {
     switch locator {
     case .number:
         guard case let .number(double) = value, let v = double as? T else {
@@ -56,13 +56,18 @@ func locate<T>(_ locator: Locator, in value: Value) throws(LocatingError) -> T {
         guard case let .array(array) = value else {
             throw LocatingError(locator: locator)
         }
-        return try locate(innerLocator, in: array[index])
+        return try lookUp(in: array[index], locator: innerLocator)
     case let .key(key, innerLocator):
         guard case let .object(object) = value,
             let dictionaryValue = object[key]
         else {
             throw LocatingError(locator: locator)
         }
-        return try locate(innerLocator, in: dictionaryValue)
+        return try lookUp(in: dictionaryValue, locator: innerLocator)
     }
+}
+
+// alternate syntax?
+func get<T>(in value: Value, locator: Locator) -> T? {
+    try? lookUp(in: value, locator: locator)
 }
