@@ -83,7 +83,7 @@ func startCLI(fileManager: FileManager = .default) {
             do {
                 let parsed = try parse(string: nextStatements.joined(separator: "\n"))
                 let result = eval(file: parsed)
-                print(result)
+                print(try print(file: parsed))
                 statements.append(input)
             } catch {
                 print(error)

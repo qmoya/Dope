@@ -7,18 +7,18 @@
 
 import Parsing
 
-struct MapParser: Parser {
-    var body: some Parser<Substring, Map> {
+struct MapParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Map> {
         "{"
         Many {
             Parse {
                 FormParser()
-                Whitespace()
+
                 FormParser()
             }
-            .map(Map.Pair.init)
+            .map(.memberwise(Map.Pair.init))
         }
-        .map(Map.init)
+        .map(.memberwise(Map.init))
         "}"
     }
 }

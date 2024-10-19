@@ -37,6 +37,7 @@ public enum Form: Equatable {
     case vector(Vector)
     case map(Map)
     case list(List)
+//    case whitespace(Substring)
 }
 
 public struct Vector: Equatable {
@@ -91,12 +92,13 @@ public struct Boolean: Equatable {
 }
 
 public struct NamespacedSymbol: Equatable {
-    let namespace: Swift.String
-    let symbol: Swift.String
+    let namespace: Name
+    let symbol: SimpleSymbol
 }
 
-public struct SimpleSymbol: Equatable {
-    let string: Swift.String
+public enum SimpleSymbol: Equatable {
+    case dot
+    case name(Name)
 }
 
 public enum Symbol: Equatable {

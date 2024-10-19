@@ -6,17 +6,15 @@
 //
 import Parsing
 
-struct NamespacedSymbolParser: Parser {
-    var body: some Parser<Substring, NamespacedSymbol> {
+struct NamespacedSymbolParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, NamespacedSymbol> {
         Parse {
             NameParser()
             
             "/"
             
-            SimpleSymbolParser().map { $0.string }
+            SimpleSymbolParser()
         }
-        .map { (namespace, symbol) in
-            NamespacedSymbol(namespace: namespace, symbol: symbol)
-        }
+        .map(.memberwise(NamespacedSymbol.init))
     }
 }

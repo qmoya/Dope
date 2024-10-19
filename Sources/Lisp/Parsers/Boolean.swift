@@ -7,8 +7,8 @@
 
 import Parsing
 
-struct BooleanParser: Parser {
-    var body: some Parser<Substring, Boolean> {
-        Bool.parser().map { Boolean(bool: $0) }
+struct BooleanParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Boolean> {
+        Bool.parser().map(.memberwise(Boolean.init))
     }
 }

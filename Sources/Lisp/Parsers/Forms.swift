@@ -6,10 +6,12 @@
 //
 import Parsing
 
-struct FormsParser: Parser {
-    var body: some Parser<Substring, [Form]> {
+struct FormsParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, [Form]> {
         Many {
+            Whitespace()
             FormParser()
+            Whitespace()
         }
     }
 }

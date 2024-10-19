@@ -13,3 +13,7 @@ public func eval(file: File) -> Form {
 public func parse(string: String) throws -> File {
     try FileParser().parse(string)
 }
+
+public func print(file: File) throws -> String {
+    String(try FileParser().print(file))
+}

@@ -6,9 +6,9 @@
 //
 import Parsing
 
-struct NumberParser: Parser {
-    var body: some Parser<Substring, Number> {
+struct NumberParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Number> {
         Int.parser()
-            .map(Number.integer)
+            .map(.case(Number.integer))
     }
 }

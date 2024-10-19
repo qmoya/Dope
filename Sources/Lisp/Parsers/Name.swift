@@ -6,25 +6,39 @@
 //
 import Parsing
 
-struct NameParser: Parser {
-    struct TailParser: Parser {
-        var body: some Parser<Substring, Swift.String> {
+public struct Name: Equatable {
+    struct HeadAndRest: Equatable {
+        let head: String
+        let rest: String
+    }
+    
+    struct Tail: Equatable {
+        let components: [String]
+    }
+
+    let headAndRest: HeadAndRest
+    let tail: Tail?
+}
+
+struct NameParser: ParserPrinter {
+    struct TailParser: ParserPrinter {
+        var body: some ParserPrinter<Substring, Name.Tail> {
             Many {
                 SymbolRestParser()
             } separator: {
                 ":"
             }
-            .map { $0.joined(separator: ":") }
+            .map(.memberwise(Name.Tail.init))
         }
     }
     
-    var body: some Parser<Substring, Swift.String> {
+    var body: some ParserPrinter<Substring, Name> {
         Parse {
             Parse {
                 SymbolHeadParser()
                 SymbolRestParser()
             }
-            .map { $0 + $1 }
+            .map(.memberwise(Name.HeadAndRest.init))
             
             Optionally {
                 ":"
@@ -32,12 +46,6 @@ struct NameParser: Parser {
                 TailParser()
             }
         }
-        .map { (first: Swift.String, rest: Swift.String?) in
-            guard let rest else {
-                return first
-            }
-            
-            return [first, rest].joined(separator: ":")
-        }
+        .map(.memberwise(Name.init))
     }
 }

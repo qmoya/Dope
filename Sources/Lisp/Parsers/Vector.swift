@@ -6,14 +6,14 @@
 //
 import Parsing
 
-struct VectorParser: Parser {
-    var body: some Parser<Substring, Vector> {
+struct VectorParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Vector> {
         Parse {
             "["
             FormsParser()
             "]"
         }
-        .map { Vector(forms: $0) }
+        .map(.memberwise(Vector.init))
     }
 }
 

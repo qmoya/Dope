@@ -6,26 +6,26 @@
 //
 import Parsing
 
-struct LiteralParser: Parser {
-    var body: some Parser<Substring, Literal> {
+struct LiteralParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Literal> {
         OneOf {
             NumberParser()
-                .map(Literal.number)
+                .map(.case(Literal.number))
             
             StringParser()
-                .map(Literal.string)
-            
+                .map(.case(Literal.string))
+
             NilParser()
-                .map(Literal.nil)
-            
+                .map(.case(Literal.nil))
+
             BooleanParser()
-                .map(Literal.boolean)
-            
+                .map(.case(Literal.boolean))
+
             SymbolParser()
-                .map(Literal.symbol)
-            
+                .map(.case(Literal.symbol))
+
             KeywordParser()
-                .map(Literal.keyword)
+                .map(.case(Literal.keyword))
         }
     }
 }

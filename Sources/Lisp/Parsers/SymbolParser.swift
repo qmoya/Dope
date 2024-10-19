@@ -1,10 +1,10 @@
 import Parsing
 
-struct SymbolParser: Parser {
-    var body: some Parser<Substring, Symbol> {
+struct SymbolParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Symbol> {
         OneOf {
-            NamespacedSymbolParser().map(Symbol.namespaced)
-            SimpleSymbolParser().map(Symbol.simple)
+            NamespacedSymbolParser().map(.case(Symbol.namespaced))
+            SimpleSymbolParser().map(.case(Symbol.simple))
         }
     }
 }

@@ -7,13 +7,12 @@
 
 import Parsing
 
-struct StringParser: Parser {
-    var body: some Parser<Substring, String> {
+struct StringParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, String> {
         Parse {
             "\""
             Prefix { $0 != "\"" }
             "\""
-        }
-        .map { String($0) }
+        }.map(.string)
     }
 }

@@ -19,8 +19,8 @@ func isSymbolHead(_ c: UTF8.CodeUnit) -> Bool {
     }
 }
 
-struct SymbolHeadParser: Parser {
-    var body: some Parser<Substring, Swift.String> {
+struct SymbolHeadParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Swift.String> {
         Prefix(1) { isSymbolHead($0) }.map(.string)
     }
 }

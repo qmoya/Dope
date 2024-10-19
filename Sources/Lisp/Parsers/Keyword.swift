@@ -7,21 +7,21 @@
 
 import Parsing
 
-struct SimpleKeywordParser: Parser {
-    var body: some Parser<Substring, SimpleKeyword> {
+struct SimpleKeywordParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, SimpleKeyword> {
         Parse {
             ":"
             SymbolParser()
 
         }
-        .map { SimpleKeyword(symbol: $0) }
+        .map(.memberwise(SimpleKeyword.init))
     }
 }
 
-struct KeywordParser: Parser {
-    var body: some Parser<Substring, Keyword> {
+struct KeywordParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Keyword> {
         OneOf {
-            SimpleKeywordParser().map(Keyword.simple)
+            SimpleKeywordParser().map(.case(Keyword.simple))
         }
     }
 }

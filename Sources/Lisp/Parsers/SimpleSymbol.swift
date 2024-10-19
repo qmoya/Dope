@@ -6,13 +6,12 @@
 //
 import Parsing
 
-struct SimpleSymbolParser: Parser {
-    var body: some Parser<Substring, SimpleSymbol> {
+struct SimpleSymbolParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, SimpleSymbol> {
         OneOf {
-            ".".map { "." }
+            ".".map(.case(SimpleSymbol.dot))
             
-            NameParser()
+            NameParser().map(.case(SimpleSymbol.name))
         }
-        .map { SimpleSymbol(string: $0)}
     }
 }

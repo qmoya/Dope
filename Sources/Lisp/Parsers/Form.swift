@@ -5,22 +5,27 @@
 //  Created by Quico Moya on 18/10/24.
 //
 import Parsing
+import Foundation
 
-struct FormParser: Parser {
-    var body: some Parser<Substring, Form> {
-        Whitespace()
-
-        OneOf {
-            VectorParser()
-                .map(Form.vector)
+struct FormParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Form> {
+        Parse {
+            Whitespace()
             
-            LiteralParser()
-                .map(Form.literal)
+            OneOf {
+                VectorParser()
+                    .map(.case(Form.vector))
+                
+                LiteralParser()
+                    .map(.case(Form.literal))
+                
+                ListParser()
+                    .map(.case(Form.list))
+                
+//                CharacterSet.whitespacesAndNewlines.map(.case(Form.whitespace))
+            }
             
-            ListParser()
-                .map(Form.list)
+            Whitespace()
         }
-        
-        Whitespace()
     }
 }

@@ -6,14 +6,14 @@
 //
 import Parsing
 
-struct ListParser: Parser {
-    var body: some Parser<Substring, List> {
+struct ListParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, List> {
         Parse {
             "("
             FormsParser()
             ")"
         }
-        .map { List(forms: $0) }
+        .map(.memberwise(List.init))
     }
 }
 

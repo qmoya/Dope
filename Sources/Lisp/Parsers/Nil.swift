@@ -7,8 +7,8 @@
 
 import Parsing
 
-struct NilParser: Parser {
-    var body: some Parser<Substring, Nil> {
-        "nil".map { Nil.nil }
+struct NilParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Nil> {
+        "nil".map(.case(Nil.nil))
     }
 }

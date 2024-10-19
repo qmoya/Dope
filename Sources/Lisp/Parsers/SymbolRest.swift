@@ -14,8 +14,8 @@ func isSymbolRest(_ c: UTF8.CodeUnit) -> Bool {
 }
 
 
-struct SymbolRestParser: Parser {
-    var body: some Parser<Substring, Swift.String> {
+struct SymbolRestParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, Swift.String> {
         Prefix { isSymbolRest($0) }.map(.string)
     }
 }

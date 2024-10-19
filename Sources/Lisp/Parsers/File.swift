@@ -6,13 +6,11 @@
 //
 import Parsing
 
-struct FileParser: Parser {
-    init() {}
-    
-    var body: some Parser<Substring, File> {
+struct FileParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, File> {
         Many {
             FormParser()
         }
-        .map { File(forms: $0) }
+        .map(.memberwise(File.init))
     }
 }
