@@ -11,10 +11,11 @@ import Testing
 		let string = try String(contentsOf: url, encoding: .utf8)
 		let read = try parse(string: string)
 
-		assertSnapshot(of: read, as: .dump, named: url.lastPathComponent.appending("-read"))
+        assertSnapshot(of: read, as: .dump, named: url.lastPathComponent.appending("-read"), record: true)
+        
 
 		let print = try print(file: read)
 
-		assertSnapshot(of: print, as: .lines, named: url.lastPathComponent.appending("-print"))
+        assertSnapshot(of: print, as: .lines, named: url.lastPathComponent.appending("-print"), record: true)
 	}
 }

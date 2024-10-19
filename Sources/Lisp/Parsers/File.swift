@@ -11,14 +11,12 @@ struct FileParser: ParserPrinter {
 		Parse {
 			Whitespace()
 
-			Many {
-				Whitespace()
-				FormParser()
+            Many {
                 Whitespace()
-            } separator: {
-                " "
+                FormParser()
+                Whitespace()
             }
-			.map(.memberwise(File.init))
+            .map(.memberwise(File.init))
 
 			Whitespace()
 		}
