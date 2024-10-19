@@ -1,5 +1,5 @@
 {
-  "originHash" : "c245ad3d9524f6eccd3a066904cdd2b0f05b275c6693cc4f209cc37b520cfa14",
+  "originHash" : "82e379af667046891e1d791741cff1e9d3abc0e801027108ec972abffc60261a",
   "pins" : [
     {
       "identity" : "swift-case-paths",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "bc92c4b27f9a84bfb498cdbfdf35d5a357e9161f",
         "version" : "1.5.6"
+      }
+    },
+    {
+      "identity" : "swift-parsing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-parsing.git",
+      "state" : {
+        "revision" : "a0e7d73f462c1c38c59dc40a3969ac40cea42950",
+        "version" : "0.13.0"
       }
     },
     {

@@ -1,3 +1,5 @@
+import CasePaths
+
 public struct LocatingError: Error, Sendable {
     public let locator: Locator
 }
@@ -12,25 +14,38 @@ public indirect enum Locator: Equatable, Sendable {
     case key(String, Locator)
 }
 
-let value: Value = .object(["hello": .number(123)])
-
 extension Value {
-    public subscript<T>(_ locator: Locator) -> T? {
-        try? lookUp(in: self, locator: locator)
-    }
+//    public subscript(key: String) -> Value {
+//        .null
+//    }
+//    
+//    
+//    public subscript<T>(_ locator: Locator) -> T? {
+//        try? lookUp(in: self, locator: locator)
+//    }
+//    
+//    public subscript<Case, V>(dynamicMember keyPath: CaseKeyPath<V, Case>) -> Case? where V: CasePathable {
+//
+//    }
 
-    public subscript<T>(_ locator: Locator, default defaultValue: T) -> T {
-        get {
-            guard let value: T = try? lookUp(in: self, locator: locator) else {
-                return defaultValue
-            }
-            return value
-        }
-        set {
-            self = update(in: self, locator: locator, newValue: newValue)
-        }
-    }
+//    public subscript<T>(_ locator: Locator, default defaultValue: T) -> T {
+//        get {
+//            guard let value: T = try? lookUp(in: self, locator: locator) else {
+//                return defaultValue
+//            }
+//            return value
+//        }
+//        set {
+//            self = update(in: self, locator: locator, newValue: newValue)
+//        }
+//    }
 }
+
+let value: Value = .object(["hello": .number(123)])
+let string: String? = value.string
+let double: Double? = value.number
+let object: [String: Value]? = value.object
+
 
 private func update<T>(in value: Value, locator: Locator, newValue: T) -> Value {
     var newValueToSet = value

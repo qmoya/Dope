@@ -1,6 +1,6 @@
 import CasePaths
 
-@CasePathable
+@CasePathable @dynamicMemberLookup
 public enum Value: Equatable, Sendable, Hashable {
     case array([Self])
     case boolean(Bool)
@@ -8,6 +8,34 @@ public enum Value: Equatable, Sendable, Hashable {
     case number(Double)
     case object([String: Self])
     case string(String)
+}
+
+extension Value {
+    public subscript(key: String) -> Value? {
+        get {
+            return self.object?[key]
+        }
+        set {
+            self.modify(\.object) { dict in
+                dict[key] = newValue
+            }
+        }
+    }
+    
+    public subscript(index: Int) -> Value? {
+        get {
+            return self.array?[index]
+        }
+        set {
+            self.modify(\.array) { array in
+                if let newValue {
+                    array[index] = newValue
+                } else {
+                    array[index] = .null
+                }
+            }
+        }
+    }
 }
 
 //extension Value: Identifiable {
