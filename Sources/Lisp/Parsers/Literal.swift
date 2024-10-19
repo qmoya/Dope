@@ -23,6 +23,9 @@ struct LiteralParser: Parser {
             
             SymbolParser()
                 .map(Literal.symbol)
+            
+            KeywordParser()
+                .map(Literal.keyword)
         }
     }
 }

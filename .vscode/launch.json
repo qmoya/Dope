@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:Dope}",
+            "name": "Debug repl",
+            "program": "${workspaceFolder:Dope}/.build/debug/repl",
+            "preLaunchTask": "swift: Build Debug repl"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:Dope}",
+            "name": "Release repl",
+            "program": "${workspaceFolder:Dope}/.build/release/repl",
+            "preLaunchTask": "swift: Build Release repl"
+        }
+    ]
+}

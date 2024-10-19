@@ -6,7 +6,7 @@
 //
 import Parsing
 
-enum Number: Equatable {
+public enum Number: Equatable {
     case integer(Int)
 }
 
@@ -19,7 +19,7 @@ enum Number: Equatable {
 //| symbol
 //| param_name
 //;
-enum Literal: Equatable {
+public enum Literal: Equatable {
     case number(Number)
     case string(String)
     case `nil`(Nil)
@@ -28,34 +28,30 @@ enum Literal: Equatable {
     case symbol(Symbol)
 }
 
-struct List: Equatable {
+public struct List: Equatable {
     let forms: [Form]
 }
 
-enum Form: Equatable {
+public enum Form: Equatable {
     case literal(Literal)
     case vector(Vector)
     case map(Map)
     case list(List)
 }
 
-struct Vector: Equatable {
+public struct Vector: Equatable {
     let forms: [Form]
 }
 
-struct File: Equatable {
+public struct File: Equatable {
     let forms: [Form]
 }
 
-struct String: Equatable {
-    let string: Swift.String
-}
-
-enum Nil: Equatable {
+public enum Nil: Equatable {
     case `nil`
 }
 
-struct Map: Equatable {
+public struct Map: Equatable {
     struct Pair: Equatable {
         let key: Form
         let value: Form
@@ -82,36 +78,36 @@ struct Map: Equatable {
 //    | gensym
 //    ;
 
-struct Set: Equatable {
+public struct Set: Equatable {
     let forms: [Form]
 }
 
-enum ReaderMacro {
+public enum ReaderMacro {
     case set(Set)
 }
 
-struct Boolean: Equatable {
+public struct Boolean: Equatable {
     let bool: Bool
 }
 
-struct NamespacedSymbol: Equatable {
+public struct NamespacedSymbol: Equatable {
     let namespace: Swift.String
     let symbol: Swift.String
 }
 
-struct SimpleSymbol: Equatable {
+public struct SimpleSymbol: Equatable {
     let string: Swift.String
 }
 
-enum Symbol: Equatable {
+public enum Symbol: Equatable {
     case namespaced(NamespacedSymbol)
     case simple(SimpleSymbol)
 }
 
-struct SimpleKeyword: Equatable {
+public struct SimpleKeyword: Equatable {
     let symbol: Symbol
 }
 
-enum Keyword: Equatable {
+public enum Keyword: Equatable {
     case simple(SimpleKeyword)
 }

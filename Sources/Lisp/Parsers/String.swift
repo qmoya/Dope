@@ -14,6 +14,6 @@ struct StringParser: Parser {
             Prefix { $0 != "\"" }
             "\""
         }
-        .map { String(string: Swift.String($0)) }
+        .map { String($0) }
     }
 }

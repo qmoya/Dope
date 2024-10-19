@@ -72,21 +72,21 @@ struct Test {
         var s: Substring = "\"foo\""
         let parser = StringParser()
         let result = try parser.parse(&s)
-        #expect(result == String(string: "foo"))
+        #expect(result == "foo")
     }
     
     @Test func testHeterogeneusVectorParsing() async throws {
         var s: Substring = #"[1 "two"]"#
         let parser = VectorParser()
         let result = try parser.parse(&s)
-        #expect(result == Vector(forms: [.literal(.number(.integer(1))), .literal(.string(String(string: "two")))]))
+        #expect(result == Vector(forms: [.literal(.number(.integer(1))), .literal(.string("two"))]))
     }
     
     @Test func testHeterogeneusVectorParsingWithComma() async throws {
         var s: Substring = #"[1, "two"]"#
         let parser = VectorParser()
         let result = try parser.parse(&s)
-        #expect(result == Vector(forms: [.literal(.number(.integer(1))), .literal(.string(String(string: "two")))]))
+        #expect(result == Vector(forms: [.literal(.number(.integer(1))), .literal(.string("two"))]))
     }
     
     @Test func testComma() async throws {
@@ -114,21 +114,21 @@ struct Test {
         var s: Substring = #"{"foo" 1}"#
         let parser = MapParser()
         let result = try parser.parse(&s)
-        #expect(result == Map(pairs: [.init(key: .literal(.string(.init(string: "foo"))), value: .literal(.number(.integer(1))))]))
+        #expect(result == Map(pairs: [.init(key: .literal(.string("foo")), value: .literal(.number(.integer(1))))]))
     }
     
     @Test func testList() async throws {
         var s: Substring = #"(1 "two")"#
         let parser = ListParser()
         let result = try parser.parse(&s)
-        #expect(result == List(forms: [.literal(.number(.integer(1))), .literal(.string(String(string: "two")))]))
+        #expect(result == List(forms: [.literal(.number(.integer(1))), .literal(.string("two"))]))
     }
     
     @Test func testSet() async throws {
         var s: Substring = #"#{1 "two"}"#
         let parser = SetParser()
         let result = try parser.parse(&s)
-        #expect(result == Set(forms: [.literal(.number(.integer(1))), .literal(.string(String(string: "two")))]))
+        #expect(result == Set(forms: [.literal(.number(.integer(1))), .literal(.string("two"))]))
     }
     
     @Test func testTrue() async throws {
@@ -178,5 +178,19 @@ struct Test {
         let parser = SymbolParser()
         let result = try parser.parse(&s)
         #expect(result == Symbol.simple(SimpleSymbol(string :"foo:bar.baz:qux")))
+    }
+    
+    @Test func testSimpleKeyword() async throws {
+        var s: Substring = ":foo"
+        let parser = SimpleKeywordParser()
+        let result = try parser.parse(&s)
+        #expect(result == SimpleKeyword(symbol: .simple(.init(string: "foo"))))
+    }
+    
+    @Test func testSimpleNamespacedKeyword() async throws {
+        var s: Substring = ":foo/bar"
+        let parser = SimpleKeywordParser()
+        let result = try parser.parse(&s)
+        #expect(result == SimpleKeyword(symbol: .namespaced(.init(namespace: "foo", symbol: "bar"))))
     }
 }
