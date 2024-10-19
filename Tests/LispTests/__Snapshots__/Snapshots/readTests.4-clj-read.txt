@@ -1,0 +1,18 @@
+▿ File
+  ▿ forms: 1 element
+    ▿ Form
+      ▿ list: List
+        ▿ forms: 2 elements
+          ▿ Form
+            ▿ literal: Literal
+              ▿ symbol: Symbol
+                ▿ simple: SimpleSymbol
+                  ▿ name: Name
+                    ▿ headAndRest: HeadAndRest
+                      - head: "+"
+                      - rest: ""
+                    - tail: Optional<Tail>.none
+          ▿ Form
+            ▿ literal: Literal
+              ▿ number: Number
+                - integer: 1
