@@ -7,18 +7,17 @@
 import Parsing
 
 struct SetParser: Parser {
-    var body: some Parser<Substring, Set> {
-        Parse {
-            "#{"
-                        
-            Many {
-                Whitespace()
-                FormParser()
-            }
-            
-            "}"
-            
-        }
-        .map { Set(forms: $0) }
-    }
+	var body: some Parser<Substring, Set> {
+		Parse {
+			"#{"
+
+			Many {
+				Whitespace()
+				FormParser()
+			}
+
+			"}"
+		}
+		.map { Set(forms: $0) }
+	}
 }

@@ -5,17 +5,17 @@
 ////  Created by Quico Moya on 18/10/24.
 ////
 //
-//import Parsing
+// import Parsing
 //
-//struct Whitespace: Equatable {
+// struct Whitespace: Equatable {
 //    init(string: String) {
 //        self.string = string
 //    }
-//    
-//    let string: String
-//}
 //
-//struct WhitespaceParser: ParserPrinter {
+//    let string: String
+// }
+//
+// struct WhitespaceParser: ParserPrinter {
 //    var body: some ParserPrinter<Substring, Whitespace> {
 //        Parse {
 //            Parsing.Whitespace()
@@ -23,8 +23,8 @@
 //        }
 //        .map(.memberwise(Whitespace.init))
 //    }
-//}
+// }
 //
-//enum DopeWhitespace {
+// enum DopeWhitespace {
 //    case betweenForms
-//}
+// }

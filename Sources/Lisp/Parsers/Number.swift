@@ -7,8 +7,8 @@
 import Parsing
 
 struct NumberParser: ParserPrinter {
-    var body: some ParserPrinter<Substring, Number> {
-        Int.parser()
-            .map(.case(Number.integer))
-    }
+	var body: some ParserPrinter<Substring, Number> {
+		Int.parser()
+			.map(.case(Number.integer))
+	}
 }

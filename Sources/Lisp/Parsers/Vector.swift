@@ -7,19 +7,22 @@
 import Parsing
 
 struct VectorParser: ParserPrinter {
-    var body: some ParserPrinter<Substring, Vector> {
-        Parse {
-            "["
-            
-            Many {
-                Whitespace()
-                FormParser()
-                Whitespace()
+	var body: some ParserPrinter<Substring, Vector> {
+		Parse {
+			"["
+
+            Whitespace()
+
+			Many {
+				FormParser()
+			} separator: {
+                " "
             }
             
-            "]"
-        }
-        .map(.memberwise(Vector.init))
-    }
-}
+            Whitespace()
 
+			"]"
+		}
+		.map(.memberwise(Vector.init))
+	}
+}

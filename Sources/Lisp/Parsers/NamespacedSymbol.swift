@@ -7,14 +7,14 @@
 import Parsing
 
 struct NamespacedSymbolParser: ParserPrinter {
-    var body: some ParserPrinter<Substring, NamespacedSymbol> {
-        Parse {
-            NameParser()
-            
-            "/"
-            
-            SimpleSymbolParser()
-        }
-        .map(.memberwise(NamespacedSymbol.init))
-    }
+	var body: some ParserPrinter<Substring, NamespacedSymbol> {
+		Parse {
+			NameParser()
+
+			"/"
+
+			SimpleSymbolParser()
+		}
+		.map(.memberwise(NamespacedSymbol.init))
+	}
 }

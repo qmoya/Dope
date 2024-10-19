@@ -7,25 +7,25 @@
 import Parsing
 
 struct LiteralParser: ParserPrinter {
-    var body: some ParserPrinter<Substring, Literal> {
-        OneOf {
-            NumberParser()
-                .map(.case(Literal.number))
-            
-            StringParser()
-                .map(.case(Literal.string))
+	var body: some ParserPrinter<Substring, Literal> {
+		OneOf {
+			NumberParser()
+				.map(.case(Literal.number))
 
-            NilParser()
-                .map(.case(Literal.nil))
+			StringParser()
+				.map(.case(Literal.string))
 
-            BooleanParser()
-                .map(.case(Literal.boolean))
+			NilParser()
+				.map(.case(Literal.nil))
 
-            SymbolParser()
-                .map(.case(Literal.symbol))
+			BooleanParser()
+				.map(.case(Literal.boolean))
 
-            KeywordParser()
-                .map(.case(Literal.keyword))
-        }
-    }
+			SymbolParser()
+				.map(.case(Literal.symbol))
+
+			KeywordParser()
+				.map(.case(Literal.keyword))
+		}
+	}
 }

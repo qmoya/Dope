@@ -7,9 +7,9 @@
 import Parsing
 
 struct ReaderMacroParser: Parser {
-    var body: some Parser<Substring, Set> {
-        OneOf {
-            SetParser()
-        }
-    }
+	var body: some Parser<Substring, Set> {
+		OneOf {
+			SetParser()
+		}
+	}
 }

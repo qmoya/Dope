@@ -1,13 +1,13 @@
-import Testing
 import SwiftSyntax
+import Testing
 
 @testable import Lisp
 
-//func evalAdd(args: Array<Form>.SubSequence) -> Form {
-//    
-//}
+// func evalAdd(args: Array<Form>.SubSequence) -> Form {
 //
-//func eval(list: List) -> Form {
+// }
+//
+// func eval(list: List) -> Form {
 //    guard let first = list.forms.first else {
 //        return .list(.init(forms: []))
 //    }
@@ -18,38 +18,38 @@ import SwiftSyntax
 //    default:
 //        fatalError("TODO")
 //    }
-//}
+// }
 
-func evalFile(file: File) -> SourceFileSyntax {
-    .init(statements: [])
+func evalFile(file _: File) -> SourceFileSyntax {
+	.init(statements: [])
 }
 
 struct EvalTests {
-//    @Test func testAdd1() async throws {
-//        let list = List(
-//            forms: [
-//                .literal(.symbol(.simple(.init(string: "+")))),
-//                .literal(.number(.integer(1))),
-//                .literal(.number(.integer(2))),
-//            ]
-//        )
-//        
-//        let result = eval(list: list)
-//        
-//        #expect(result == .literal(.number(.integer(3))))
-//    }
-//    
-//    @Test func testAdd2() async throws {
-//        let list = List(
-//            forms: [
-//                .literal(.symbol(.simple(.init(string: "+")))),
-//                .literal(.number(.integer(2))),
-//                .literal(.number(.integer(2))),
-//            ]
-//        )
-//        
-//        let result = eval(list: list)
-//        
-//        #expect(result == .literal(.number(.integer(4))))
-//    }
+	//    @Test func testAdd1() async throws {
+	//        let list = List(
+	//            forms: [
+	//                .literal(.symbol(.simple(.init(string: "+")))),
+	//                .literal(.number(.integer(1))),
+	//                .literal(.number(.integer(2))),
+	//            ]
+	//        )
+//
+	//        let result = eval(list: list)
+//
+	//        #expect(result == .literal(.number(.integer(3))))
+	//    }
+//
+	//    @Test func testAdd2() async throws {
+	//        let list = List(
+	//            forms: [
+	//                .literal(.symbol(.simple(.init(string: "+")))),
+	//                .literal(.number(.integer(2))),
+	//                .literal(.number(.integer(2))),
+	//            ]
+	//        )
+//
+	//        let result = eval(list: list)
+//
+	//        #expect(result == .literal(.number(.integer(4))))
+	//    }
 }

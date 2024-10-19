@@ -7,17 +7,20 @@
 import Parsing
 
 struct FileParser: ParserPrinter {
-    var body: some ParserPrinter<Substring, File> {
-        Parse {
-            Whitespace()
+	var body: some ParserPrinter<Substring, File> {
+		Parse {
+			Whitespace()
 
-            Many {
+			Many {
+				Whitespace()
+				FormParser()
                 Whitespace()
-                FormParser()
+            } separator: {
+                " "
             }
-            .map(.memberwise(File.init))
+			.map(.memberwise(File.init))
 
-            Whitespace()
-        }
-    }
+			Whitespace()
+		}
+	}
 }
