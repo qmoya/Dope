@@ -10,7 +10,12 @@ struct ListParser: ParserPrinter {
     var body: some ParserPrinter<Substring, List> {
         Parse {
             "("
-            FormsParser()
+
+            Many {
+                Whitespace()
+                FormParser()
+            }
+            
             ")"
         }
         .map(.memberwise(List.init))

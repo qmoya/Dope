@@ -10,8 +10,14 @@ struct SetParser: Parser {
     var body: some Parser<Substring, Set> {
         Parse {
             "#{"
-            FormsParser()
+                        
+            Many {
+                Whitespace()
+                FormParser()
+            }
+            
             "}"
+            
         }
         .map { Set(forms: $0) }
     }

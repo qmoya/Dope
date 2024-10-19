@@ -10,7 +10,13 @@ struct VectorParser: ParserPrinter {
     var body: some ParserPrinter<Substring, Vector> {
         Parse {
             "["
-            FormsParser()
+            
+            Many {
+                Whitespace()
+                FormParser()
+                Whitespace()
+            }
+            
             "]"
         }
         .map(.memberwise(Vector.init))

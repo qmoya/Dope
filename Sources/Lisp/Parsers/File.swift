@@ -8,9 +8,16 @@ import Parsing
 
 struct FileParser: ParserPrinter {
     var body: some ParserPrinter<Substring, File> {
-        Many {
-            FormParser()
+        Parse {
+            Whitespace()
+
+            Many {
+                Whitespace()
+                FormParser()
+            }
+            .map(.memberwise(File.init))
+
+            Whitespace()
         }
-        .map(.memberwise(File.init))
     }
 }

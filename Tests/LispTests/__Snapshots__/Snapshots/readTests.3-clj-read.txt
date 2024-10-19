@@ -1,0 +1,17 @@
+▿ File
+  ▿ forms: 1 element
+    ▿ Form
+      ▿ vector: Vector
+        ▿ forms: 3 elements
+          ▿ Form
+            ▿ literal: Literal
+              ▿ number: Number
+                - integer: 1
+          ▿ Form
+            ▿ literal: Literal
+              ▿ number: Number
+                - integer: 2
+          ▿ Form
+            ▿ literal: Literal
+              ▿ number: Number
+                - integer: 3

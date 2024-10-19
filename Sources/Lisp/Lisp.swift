@@ -37,7 +37,7 @@ public enum Form: Equatable {
     case vector(Vector)
     case map(Map)
     case list(List)
-//    case whitespace(Substring)
+    case whitespace(DopeWhitespace)
 }
 
 public struct Vector: Equatable {

@@ -21,6 +21,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-case-paths.git", from: "1.5.6"),
         .package(url: "https://github.com/pointfreeco/swift-parsing.git", from: "0.13.0"),
         .package(url: "https://github.com/swiftlang/swift-syntax.git", from: "600.0.1"),
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", branch: "main")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -47,7 +48,13 @@ let package = Package(
         ),
         .testTarget(
             name: "LispTests",
-            dependencies: ["Lisp"]
+            dependencies: [
+                "Lisp",
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
+            ],
+            resources: [
+                .copy("Examples")
+            ]
         ),
         
         .macro(

@@ -7,11 +7,20 @@
 import Parsing
 import Foundation
 
+public struct DopeWhitespace: Equatable {
+    let string: Substring
+}
+
+struct DopeWhitespaceParser: ParserPrinter {
+    var body: some ParserPrinter<Substring, DopeWhitespace> {
+        CharacterSet.whitespacesAndNewlines
+            .map(.memberwise(DopeWhitespace.init))
+    }
+}
+
 struct FormParser: ParserPrinter {
     var body: some ParserPrinter<Substring, Form> {
         Parse {
-            Whitespace()
-            
             OneOf {
                 VectorParser()
                     .map(.case(Form.vector))
@@ -21,11 +30,12 @@ struct FormParser: ParserPrinter {
                 
                 ListParser()
                     .map(.case(Form.list))
-                
+                                
+//                DopeWhitespaceParser()
+//                    .map(.case(Form.whitespace))
 //                CharacterSet.whitespacesAndNewlines.map(.case(Form.whitespace))
             }
-            
-            Whitespace()
+//            .replaceError(with: Form.whitespace(.init(string: "error")))
         }
     }
 }

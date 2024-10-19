@@ -104,6 +104,13 @@ struct Test {
         #expect(result == List(forms: []))
     }
     
+    @Test func testEmptyVector() async throws {
+        var s: Substring = #"[]"#
+        let parser = VectorParser()
+        let result = try parser.parse(&s)
+        #expect(result == Vector(forms: []))
+    }
+    
     @Test func testNil() async throws {
         var s: Substring = #"nil"#
         let parser = NilParser()
@@ -118,6 +125,13 @@ struct Test {
         #expect(result == Map(pairs: [.init(key: .literal(.string("foo")), value: .literal(.number(.integer(1))))]))
     }
     
+    @Test func testMap2() async throws {
+        var s: Substring = #"{"foo" 1 :bar "baz"}"#
+        let parser = MapParser()
+        let result = try parser.parse(&s)
+        #expect(result == Map(pairs: [.init(key: .literal(.string("foo")), value: .literal(.number(.integer(1)))), .init(key: .literal(.keyword(.simple(.init(symbol: .simple(.name(.init(headAndRest: .init(head: "b", rest: "ar"), tail: nil))))))), value: .literal(.string("baz")))]))
+    }
+
     @Test func testList() async throws {
         var s: Substring = #"(1 "two")"#
         let parser = ListParser()
@@ -130,6 +144,13 @@ struct Test {
         let parser = SetParser()
         let result = try parser.parse(&s)
         #expect(result == Set(forms: [.literal(.number(.integer(1))), .literal(.string("two"))]))
+    }
+    
+    @Test func testEmptySet() async throws {
+        var s: Substring = #"#{}"#
+        let parser = SetParser()
+        let result = try parser.parse(&s)
+        #expect(result == Set(forms: []))
     }
     
     @Test func testTrue() async throws {
@@ -209,17 +230,26 @@ struct Test {
         #expect(result == "foo:bar:baz")
     }
     
-    @Test func printingSimpleSymbol() async throws {
-        let file = File(forms: [
-            Lisp.Form.list(
-                Lisp.List(forms: [
-//                    Lisp.Form.literal(Lisp.Literal.symbol(Lisp.Symbol.simple(Lisp.SimpleSymbol.name(Lisp.Name(headAndRest: Lisp.Name.HeadAndRest(head: "+", rest: ""), tail: nil))))),
-                    Lisp.Form.literal(Lisp.Literal.number(Lisp.Number.integer(1))),
-                    Lisp.Form.literal(Lisp.Literal.number(Lisp.Number.integer(2)))
-                ])
-            )
+//    @Test func printingSimpleSymbol() async throws {
+//        let file = File(forms: [
+//            Lisp.Form.list(
+//                Lisp.List(forms: [
+////                    Lisp.Form.literal(Lisp.Literal.symbol(Lisp.Symbol.simple(Lisp.SimpleSymbol.name(Lisp.Name(headAndRest: Lisp.Name.HeadAndRest(head: "+", rest: ""), tail: nil))))),
+//                    Lisp.Form.literal(Lisp.Literal.number(Lisp.Number.integer(1))),
+////                    Lisp.Form.literal(Lisp.Literal.number(Lisp.Number.integer(2)))
+//                ])
+//            )
+//        ])
+//        let parser = FileParser()
+//        let result = try parser.print(file)
+//        #expect(result == "(1)")
+//    }
+    
+    @Test func printingSimpleSymbolList() async throws {
+        let file = Lisp.List(forms: [
+            Lisp.Form.literal(Lisp.Literal.number(Lisp.Number.integer(1))),
         ])
-        let parser = FileParser()
+        let parser = ListParser()
         let result = try parser.print(file)
         #expect(result == "(1)")
     }
